@@ -1,96 +1,40 @@
-#employee pgm using function
-employee = {}
 
-
-def add_employee():
-	#add
-	serial_no = input("Enter serial_no\n")
-	if serial_no not in employee.keys():
-
-		name=input("Enter the employee name\n")
-		age=int(input("enter the age\n"))        
-		gender=input("enter the gender\n")
-		place=input("Enter the place\n")
-		salary=int(input("Enter the salary\n"))
-		previous_company=input("Enter the previous company\n")
-		joining_date=int(input("Enter the joining date\n"))
-		temp = {
-			"name" : name,
-			"age" : age,
-			"gender" : gender,
-			"place" : place,
-			"salary" : salary,
-			"previous_company" : previous_company,
-			"joining_date" : joining_date
-			}
-		employee[serial_no] = temp
-	else:
-		print("Serial no already taken")
-
-def delete_employee():
-	#delete
-	serial_no = input("Enter serial_no\n")
-	if serial_no not in employee.keys():
-		print("Wrong serial number")
-	else:
-		 del employee[serial_no]
-
-
-def search_employee():
-	#search
-	name = input("Enter name\n")
-	found = False
-	for i in employee.values():
-		if i["name"] == name:
-			print(f"{i['name']} | {i['age']} |{i['gender']} |{i['place']} |{i['salary']} | {i['previous_company']} | {i['joining_date']} ")
-			found = True
-			break
-	if found == False :
-		print("Not found")
-
-def display_employee():
-	for serial,employee in employee.items():
-		print(f"{serial} | {employee['name']} | {employee['age']} | {employee['gender']} | {employee['place']} | {employee['salary']} | {employee['previous_company']} | {employee['joining_date']}")
-
-def change_employee():
-	serial_no = input("Enter serial no\n")
-	if serial_no not in employee.keys():
-		print("Wrong serial no")
-	else:
-		employee[serial_no]['name'] = input("Enter the new name\n")
-		employee[serial_no]['age'] = input("Enter the new age\n")
-		employee[serial_no]['gender'] = input("Enter the new gender\n")
-		employee[serial_no]['place'] = input("Enter the new place\n")
-
-def main_menu():
-	print("1.Add employee details")
+employee = []
+while True:
+	
+	print("1.Add employee")
 	print("2.Delete employee")
 	print("3.Search employee")
-	print("4.Display all employee details")
-	print("5.Change employee data")
+	print("4.Change employee data")
+	print("5.Display all employee details")
 	print("6.Exit")
-
-
-while True:
-	main_menu()
 	choice = int(input("enter your choice\n"))
 	if choice == 1:
-		#add
-		add_employee()
-	elif choice == 2:
-		#delete
-		delete_employee()			
-	elif choice == 3:
-		#search
-		search_employee()
-	elif choice == 4:
-		#Display
-		display_employee()	
-	elif choice == 5 :
-		#Change
-		change_employee()
-	elif choice == 6:
+		name=input("Enter the employee name\n")
+		if name != None: 
+			employee.append(name)
+	if choice == 2:
+		print(employee)
+		print("Choose the employee name to delete")
+		name=input("Enter the employee name to delete\n")
+		employee.remove(name)
+	if choice == 3:
+		name=input("Enter the name to search\n")
+		if name in employee:
+			print(name + "is in the list\n")
+		else:
+			print(name + "is not in the list\n")
+	if choice == 4:
+		name = input("Enter the name to be changed\n")
+		index = employee.index(name)
+		new_name = input("Enter the new_name\n")
+		employee[index] = new_name
+
+	if choice == 5:
+		#print(employee)
+		x=1
+		for i in employee:
+			print (str(x) + "." + i)
+			x += 1
+	if choice == 6: 
 		break;
-	else:
-		print("invalid choice")
-		
